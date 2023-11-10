@@ -30,6 +30,13 @@ const PopularItems = () => {
 						<MenuItemCard key={menu._id} menu={menu}></MenuItemCard>
 					))}
 				</div>
+
+				{/* Butoon */}
+				<div className=" flex justify-center items-center pt-10">
+					<button className=" border-b-2 border-gray-900 px-2 py-2 rounded-lg text-lg font-medium hover:-translate-y-1 transition-all duration-200 uppercase bg-gray-50">
+						View Full Menu
+					</button>
+				</div>
 			</Container>
 		</SectionContainer>
 	);
