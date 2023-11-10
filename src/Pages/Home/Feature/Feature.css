@@ -1,5 +1,5 @@
-.bistro-boss-bg-image {
-	background-image: url('../../../assets/home/chef-service.jpg');
+.feature-bg {
+	background-image: url('../../../assets/home/featured.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

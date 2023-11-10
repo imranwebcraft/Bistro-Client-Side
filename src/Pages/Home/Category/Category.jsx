@@ -1,7 +1,6 @@
 import Container from '../../../UI/Container';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import './Catrgory.css';
 
 // Import Swiper styles
 import 'swiper/css';
