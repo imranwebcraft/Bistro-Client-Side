@@ -1,6 +1,7 @@
 import Banner from './Banner/Banner';
 import BistroBoss from './BistroBoss/BistroBoss';
 import Category from './Category/Category';
+import PopularItems from './PopularItems/PopularItems';
 
 const Home = () => {
 	return (
@@ -8,6 +9,7 @@ const Home = () => {
 			<Banner></Banner>
 			<Category></Category>
 			<BistroBoss></BistroBoss>
+			<PopularItems></PopularItems>
 		</div>
 	);
 };
