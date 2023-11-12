@@ -14,16 +14,7 @@ const Navbar = () => {
 					Home
 				</NavLink>
 			</li>
-			{/* <li className=" uppercase ">
-				<NavLink
-					to="/contact-us"
-					className={({ isActive }) =>
-						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
-					}
-				>
-					Contact US
-				</NavLink>
-			</li> */}
+
 			<li className=" uppercase ">
 				<NavLink
 					to="/our-menu"
@@ -32,6 +23,16 @@ const Navbar = () => {
 					}
 				>
 					Our Menu
+				</NavLink>
+			</li>
+			<li className=" uppercase ">
+				<NavLink
+					to="/order"
+					className={({ isActive }) =>
+						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
+					}
+				>
+					Order Food
 				</NavLink>
 			</li>
 		</ul>

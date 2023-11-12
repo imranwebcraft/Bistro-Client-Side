@@ -7,6 +7,9 @@ import SectionTitle from '../../Components/SectionTitle';
 import MenuCategory from './MenuCategory/MenuCategory';
 import Container from '../../UI/Container';
 import dessertImg from '../../assets/menu/dessert-bg.jpeg';
+import pizzaImg from '../../assets/menu/pizza-bg.jpg';
+import saladImg from '../../assets/menu/salad-bg.jpg';
+import soupImg from '../../assets/menu/soup-bg.jpg';
 
 const Menu = () => {
 	const [menus] = useMenu();
@@ -58,7 +61,7 @@ const Menu = () => {
 			{/* Pizza Section */}
 			<SectionContainer>
 				<Cover
-					img={dessertImg}
+					img={pizzaImg}
 					heading="pizza"
 					subheading="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
 				></Cover>
@@ -72,7 +75,7 @@ const Menu = () => {
 			{/* Salad Section */}
 			<SectionContainer>
 				<Cover
-					img={dessertImg}
+					img={saladImg}
 					heading="Salad"
 					subheading="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
 				></Cover>
@@ -86,7 +89,7 @@ const Menu = () => {
 			{/* Soup Section */}
 			<SectionContainer>
 				<Cover
-					img={dessertImg}
+					img={soupImg}
 					heading="Soup"
 					subheading="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
 				></Cover>

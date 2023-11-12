@@ -1,0 +1,20 @@
+.react-tabs {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-image: none;
+}
+
+.react-tabs__tab--selected {
+	color: purple;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	font-weight: 600;
+}
+.react-tabs__tab-list {
+	border: none;
+}
