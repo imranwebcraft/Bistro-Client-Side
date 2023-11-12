@@ -37,10 +37,7 @@ const Menu = () => {
 						subHeading="Don't Miss"
 						heading="Todays offer"
 					></SectionTitle>
-					<MenuCategory
-						items={offered}
-						btnText="ORDER YOUR FAVOURITE FOOD"
-					></MenuCategory>
+					<MenuCategory items={offered} btnText="Order Now"></MenuCategory>
 				</Container>
 			</SectionContainer>
 
@@ -54,7 +51,8 @@ const Menu = () => {
 				<Container>
 					<MenuCategory
 						items={desserts}
-						btnText="ORDER YOUR FAVOURITE FOOD"
+						btnText="Order Now"
+						category={'dessert'}
 					></MenuCategory>
 				</Container>
 			</SectionContainer>
@@ -68,7 +66,8 @@ const Menu = () => {
 				<Container>
 					<MenuCategory
 						items={pizza}
-						btnText="ORDER YOUR FAVOURITE FOOD"
+						btnText="Order Now"
+						category={'pizza'}
 					></MenuCategory>
 				</Container>
 			</SectionContainer>
@@ -82,7 +81,8 @@ const Menu = () => {
 				<Container>
 					<MenuCategory
 						items={salad}
-						btnText="ORDER YOUR FAVOURITE FOOD"
+						btnText="Order Now"
+						category={'salad'}
 					></MenuCategory>
 				</Container>
 			</SectionContainer>
@@ -96,7 +96,8 @@ const Menu = () => {
 				<Container>
 					<MenuCategory
 						items={soup}
-						btnText="ORDER YOUR FAVOURITE FOOD"
+						btnText="Order Now"
+						category={'soup'}
 					></MenuCategory>
 				</Container>
 			</SectionContainer>

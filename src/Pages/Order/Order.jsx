@@ -8,13 +8,18 @@ import { useState } from 'react';
 import './Order.css';
 import useMenu from '../../Hooks/useMenu';
 import OrderTab from './OrderTab/OrderTab';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Order = () => {
-	const [tabIndex, setTabIndex] = useState(0);
+	const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks'];
+	const { category } = useParams();
+	// category jeta astece, setake amra categories er moddhe theke khoj korci, setar index koto. Sei index take set korteci
+	const initialIndex = categories.indexOf(category);
+	const [tabIndex, setTabIndex] = useState(initialIndex);
 	const [menus] = useMenu();
-	// Category items data
 
-	const desserts = menus.filter(menuItem => menuItem.category === 'dessert');
+	const dessert = menus.filter(menuItem => menuItem.category === 'dessert');
 	const pizza = menus.filter(menuItem => menuItem.category === 'pizza');
 	const salad = menus.filter(menuItem => menuItem.category === 'salad');
 	const soup = menus.filter(menuItem => menuItem.category === 'soup');
@@ -22,6 +27,10 @@ const Order = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Bistro | Order</title>
+			</Helmet>
+
 			<Cover
 				img={orderImg}
 				subheading="Would you like to try a dish?"
@@ -34,8 +43,8 @@ const Order = () => {
 						<TabList>
 							<Tab>Salad</Tab>
 							<Tab>Pizza</Tab>
-							<Tab>Soups</Tab>
-							<Tab>Desserts</Tab>
+							<Tab>Soup</Tab>
+							<Tab>Dessert</Tab>
 							<Tab>Drinks</Tab>
 						</TabList>
 
@@ -49,7 +58,7 @@ const Order = () => {
 							<OrderTab orderItems={soup}></OrderTab>
 						</TabPanel>
 						<TabPanel>
-							<OrderTab orderItems={desserts}></OrderTab>
+							<OrderTab orderItems={dessert}></OrderTab>
 						</TabPanel>
 						<TabPanel>
 							<OrderTab orderItems={drinks}></OrderTab>

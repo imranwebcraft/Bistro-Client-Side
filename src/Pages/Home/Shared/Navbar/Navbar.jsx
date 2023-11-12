@@ -27,7 +27,7 @@ const Navbar = () => {
 			</li>
 			<li className=" uppercase ">
 				<NavLink
-					to="/order"
+					to="/order/salad"
 					className={({ isActive }) =>
 						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
 					}
