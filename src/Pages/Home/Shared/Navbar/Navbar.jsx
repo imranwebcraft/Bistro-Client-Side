@@ -1,7 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import navBarImg from '../../../../assets/icon/navbarIcon.png';
+import useAuth from '../../../../Hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
+	// Auth context
+	const { user, logOut } = useAuth();
+
+	// Log out event hadler
+	const handleLogOut = () => {
+		logOut()
+			.then(() => {
+				toast.success('Log Out successfull!');
+			})
+			.catch(error => {
+				toast.error(error.message);
+			});
+	};
+
 	const navlinks = (
 		<ul className="menu menu-horizontal px-1 space-x-5">
 			<li className=" uppercase">
@@ -35,16 +51,30 @@ const Navbar = () => {
 					Order Food
 				</NavLink>
 			</li>
-			<li className=" uppercase ">
-				<NavLink
-					to="/login"
-					className={({ isActive }) =>
-						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
-					}
-				>
-					Log In
-				</NavLink>
-			</li>
+			{user ? (
+				<>
+					<li className=" uppercase ">
+						<button className=" font-medium uppercase" onClick={handleLogOut}>
+							Log Out
+						</button>
+					</li>
+				</>
+			) : (
+				<>
+					<li className=" uppercase ">
+						<NavLink
+							to="/login"
+							className={({ isActive }) =>
+								isActive
+									? ' bg-green-500 font-semibold text-white'
+									: ' font-medium'
+							}
+						>
+							Log In
+						</NavLink>
+					</li>
+				</>
+			)}
 		</ul>
 	);
 

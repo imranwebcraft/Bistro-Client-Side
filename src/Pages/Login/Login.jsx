@@ -27,9 +27,11 @@ const Login = () => {
 		logIn(email, password)
 			.then(result => {
 				console.log(result.user);
+				toast.success('Log In successfull!');
 			})
 			.catch(error => {
 				console.log(error.message);
+				toast.error(error.message);
 			});
 	};
 
