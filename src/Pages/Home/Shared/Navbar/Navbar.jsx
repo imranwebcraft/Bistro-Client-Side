@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 const Navbar = () => {
 	// Auth context
 	const { user, logOut } = useAuth();
-
 	// Log out event hadler
 	const handleLogOut = () => {
 		logOut()
@@ -63,13 +62,17 @@ const Navbar = () => {
 			</li>
 			{/* Conditional Navbar */}
 			{user ? (
-				<>
+				<div className=" flex items-center">
+					<span className=" bg-gray-700 px-3 py-1 rounded-md">
+						{' '}
+						{user.displayName}{' '}
+					</span>
 					<li className=" uppercase ">
 						<button className=" font-medium uppercase" onClick={handleLogOut}>
 							Log Out
 						</button>
 					</li>
-				</>
+				</div>
 			) : (
 				<>
 					<li className=" uppercase ">

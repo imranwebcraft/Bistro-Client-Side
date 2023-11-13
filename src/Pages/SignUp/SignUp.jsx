@@ -1,28 +1,48 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/Auth.png';
 import { useForm } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../Hooks/useAuth';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
-	const { createUser } = useAuth();
+	const { createUser, updateUserProfile, logOut } = useAuth();
+	const navigate = useNavigate();
 
 	const {
 		register,
 		handleSubmit,
 		control,
 		formState: { errors },
+		reset,
 	} = useForm();
 
 	const onSubmit = data => {
-		console.log(data);
 		createUser(data?.email, data?.password)
 			.then(result => {
 				console.log(result.user);
+				toast.success('User create successfull');
+
+				updateUserProfile(data.name, data.photo)
+					.then(() => {
+						toast.success('User profile update successfull');
+						logOut()
+							.then(() => {
+								navigate('/login');
+							})
+							.catch(() => {
+								toast.error("Can't redirect to the login page");
+							});
+					})
+					.catch(() => {
+						toast.error('Unable to update user profile');
+					});
+				reset();
 			})
 			.catch(error => {
 				console.log(error);
+				toast.error(error.message);
 			});
 	};
 
@@ -52,6 +72,21 @@ const SignUp = () => {
 							/>
 							{errors.name?.type === 'required' && (
 								<span className=" text-red-600">Name is required</span>
+							)}
+						</div>
+						<div className="form-control">
+							<label className="label">
+								<span className="label-text">Photo URL</span>
+							</label>
+							<input
+								type="text"
+								placeholder="Photo URL"
+								className="input input-bordered"
+								required
+								{...register('photo', { required: true })}
+							/>
+							{errors.photo?.type === 'required' && (
+								<span className=" text-red-600">Photo is required</span>
 							)}
 						</div>
 						<div className="form-control">
