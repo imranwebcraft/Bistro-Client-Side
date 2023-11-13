@@ -1,6 +1,8 @@
 import Swal from 'sweetalert2';
 import useAuth from '../Hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
 
 const FoodCard = ({ foodItem }) => {
 	// Destructure
@@ -11,10 +13,10 @@ const FoodCard = ({ foodItem }) => {
 
 	// Auth context
 	const { user } = useAuth();
+	const axiosSecure = useAxiosSecure();
 
 	const handleAddToCart = () => {
 		if (user && user?.email) {
-			// Todo: Add items data to the database
 			const cartItem = {
 				menuId: _id,
 				email: user?.email,
@@ -22,6 +24,17 @@ const FoodCard = ({ foodItem }) => {
 				image,
 				price,
 			};
+			axiosSecure
+				.post('/carts', cartItem)
+				.then(res => {
+					if (res.data.insertedId) {
+						toast.success(` ${name} Added to the cart!`);
+					}
+				})
+				.catch(error => {
+					console.log(error);
+					toast.error('Something went wrong!😥');
+				});
 		} else {
 			Swal.fire({
 				title: 'ATTENTION!',
