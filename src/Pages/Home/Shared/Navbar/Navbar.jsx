@@ -3,8 +3,12 @@ import navBarImg from '../../../../assets/icon/navbarIcon.png';
 import useAuth from '../../../../Hooks/useAuth';
 import toast from 'react-hot-toast';
 import { FaCartShopping } from 'react-icons/fa6';
+import useCart from '../../../../Hooks/useCart';
 
 const Navbar = () => {
+	// Hook
+	const [cart] = useCart();
+
 	// Auth context
 	const { user, logOut } = useAuth();
 	// Log out event hadler
@@ -61,16 +65,16 @@ const Navbar = () => {
 					Secret
 				</NavLink>
 			</li>
-			<li className=" uppercase bg-blue-400 rounded-md">
+			<li className=" uppercase">
 				<NavLink
 					to="/"
 					className={({ isActive }) =>
 						isActive ? 'font-semibold text-white' : ' font-medium'
 					}
 				>
-					<button className="btn btn-xs">
+					<button className="btn btn-sm">
 						<FaCartShopping></FaCartShopping>
-						<div className="badge badge-secondary">+0</div>
+						<div className="badge badge-secondary">+{cart?.length}</div>
 					</button>
 				</NavLink>
 			</li>
