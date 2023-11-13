@@ -35,6 +35,16 @@ const Navbar = () => {
 					Order Food
 				</NavLink>
 			</li>
+			<li className=" uppercase ">
+				<NavLink
+					to="/login"
+					className={({ isActive }) =>
+						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
+					}
+				>
+					Log In
+				</NavLink>
+			</li>
 		</ul>
 	);
 
