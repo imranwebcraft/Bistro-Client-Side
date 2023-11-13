@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import navBarImg from '../../../../assets/icon/navbarIcon.png';
 import useAuth from '../../../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import { FaCartShopping } from 'react-icons/fa6';
 
 const Navbar = () => {
 	// Auth context
@@ -58,6 +59,19 @@ const Navbar = () => {
 					}
 				>
 					Secret
+				</NavLink>
+			</li>
+			<li className=" uppercase bg-blue-400 rounded-md">
+				<NavLink
+					to="/"
+					className={({ isActive }) =>
+						isActive ? 'font-semibold text-white' : ' font-medium'
+					}
+				>
+					<button className="btn btn-xs">
+						<FaCartShopping></FaCartShopping>
+						<div className="badge badge-secondary">+0</div>
+					</button>
 				</NavLink>
 			</li>
 			{/* Conditional Navbar */}

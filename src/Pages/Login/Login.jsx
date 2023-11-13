@@ -15,8 +15,10 @@ const Login = () => {
 
 	const location = useLocation();
 	const navigate = useNavigate();
+	console.log(location);
 
 	// State
+	// eslint-disable-next-line no-unused-vars
 	const [disable, setDisable] = useState(true);
 	const captchaRef = useRef();
 
@@ -104,21 +106,13 @@ const Login = () => {
 								name="captch"
 								placeholder="Type captch here"
 								className="input input-bordered"
-								required
 							/>
 						</div>
-						{/* Or validate the captch with a button click */}
-						{/* <div>
-							<button
-								onClick={handleValidateCaptcha}
-								className=" btn btn-block hover:bg-red-500  hover:text-white btn-xs normal-case"
-							>
-								Validate Captcha
-							</button>
-						</div> */}
+
 						<div className="form-control mt-6">
 							<button
-								disabled={disable}
+								// Todo: Enable captcha validation
+								disabled={false}
 								type="submit"
 								className="btn btn-primary"
 							>
