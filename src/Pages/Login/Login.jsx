@@ -7,8 +7,12 @@ import {
 } from 'react-simple-captcha';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import useAuth from '../../Hooks/useAuth';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
+	const { logIn } = useAuth();
+
 	// State
 	const [disable, setDisable] = useState(true);
 	const captchaRef = useRef();
@@ -19,7 +23,14 @@ const Login = () => {
 		const form = e.target;
 		const email = form.email.value;
 		const password = form.password.value;
-		console.log({ email, password });
+
+		logIn(email, password)
+			.then(result => {
+				console.log(result.user);
+			})
+			.catch(error => {
+				console.log(error.message);
+			});
 	};
 
 	// Captcha Engine
@@ -41,6 +52,9 @@ const Login = () => {
 
 	return (
 		<div className="hero min-h-screen bg-base-200">
+			<Helmet>
+				<title>Bistro | Log In</title>
+			</Helmet>
 			<div className="hero-content flex-col lg:flex-row">
 				<div className=" w-1/2 text-center lg:text-left">
 					<figure>
@@ -72,11 +86,6 @@ const Login = () => {
 								className="input input-bordered"
 								required
 							/>
-							<label className="label">
-								<a className="label-text-alt link link-hover">
-									Forgot password?
-								</a>
-							</label>
 						</div>
 						<div className=" form-control">
 							<LoadCanvasTemplate />
