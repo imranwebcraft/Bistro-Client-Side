@@ -3,11 +3,13 @@ import useAuth from '../Hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import useCart from '../Hooks/useCart';
 
 const FoodCard = ({ foodItem }) => {
 	// Destructure
 	const { name, recipe, image, price, _id } = foodItem || {};
 	// Hook
+	const [, refetch] = useCart();
 	const navigate = useNavigate();
 	const location = useLocation();
 
@@ -30,6 +32,8 @@ const FoodCard = ({ foodItem }) => {
 					if (res.data.insertedId) {
 						toast.success(` ${name} Added to the cart!`);
 					}
+					// Call refetch to update the data for cart to calculate cart items count
+					refetch();
 				})
 				.catch(error => {
 					console.log(error);
