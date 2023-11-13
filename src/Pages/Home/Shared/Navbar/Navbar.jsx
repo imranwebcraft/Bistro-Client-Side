@@ -51,6 +51,17 @@ const Navbar = () => {
 					Order Food
 				</NavLink>
 			</li>
+			<li className=" uppercase ">
+				<NavLink
+					to="/secret"
+					className={({ isActive }) =>
+						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
+					}
+				>
+					Secret
+				</NavLink>
+			</li>
+			{/* Conditional Navbar */}
 			{user ? (
 				<>
 					<li className=" uppercase ">

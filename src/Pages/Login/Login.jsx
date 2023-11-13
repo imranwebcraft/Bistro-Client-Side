@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/Auth.png';
 import {
 	loadCaptchaEnginge,
@@ -12,6 +12,9 @@ import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
 	const { logIn } = useAuth();
+
+	const location = useLocation();
+	const navigate = useNavigate();
 
 	// State
 	const [disable, setDisable] = useState(true);
@@ -28,6 +31,8 @@ const Login = () => {
 			.then(result => {
 				console.log(result.user);
 				toast.success('Log In successfull!');
+				// Navigate the user their desire location
+				navigate(location.state ? location.state.from.pathname : '/');
 			})
 			.catch(error => {
 				console.log(error.message);
