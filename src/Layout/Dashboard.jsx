@@ -3,17 +3,19 @@ import {
 	FaBagShopping,
 	FaBars,
 	FaCalendar,
+	FaCalendarPlus,
 	FaCartShopping,
 	FaHouse,
 	FaHouseChimney,
 	FaPaypal,
-	FaPhoneFlip,
 	FaPhoneVolume,
 	FaStar,
-	FaVoicemail,
 } from 'react-icons/fa6';
+import useCart from '../Hooks/useCart';
 
 const Dashboard = () => {
+	const [cart] = useCart();
+
 	return (
 		<div className=" flex gap-10">
 			{/* Sidebar */}
@@ -67,6 +69,7 @@ const Dashboard = () => {
 							>
 								<span className=" flex items-center gap-2 bg-gray-800 px-2 py-2 rounded-md mt-2">
 									<FaCartShopping className=" text-lg"></FaCartShopping> My Cart
+									<span className=" text-sky-500">(Items: {cart?.length})</span>
 								</span>
 							</NavLink>
 							<NavLink
@@ -86,7 +89,8 @@ const Dashboard = () => {
 								}
 							>
 								<span className=" flex items-center gap-2 bg-gray-800 px-2 py-2 rounded-md mt-2">
-									<FaStar className=" text-lg"></FaStar> My Booking
+									<FaCalendarPlus className=" text-lg"></FaCalendarPlus> My
+									Booking
 								</span>
 							</NavLink>
 						</li>
@@ -135,7 +139,7 @@ const Dashboard = () => {
 				</div>
 			</div>
 			{/* Content */}
-			<div className=" flex-1">
+			<div className=" flex-1 py-16">
 				<Outlet></Outlet>
 			</div>
 		</div>
