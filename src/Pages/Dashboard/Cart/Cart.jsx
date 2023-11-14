@@ -2,13 +2,50 @@ import { FaTrashCan } from 'react-icons/fa6';
 import SectionTitle from '../../../Components/SectionTitle';
 import useCart from '../../../Hooks/useCart';
 import Container from '../../../UI/Container';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
 	// Hook
-	const [cart] = useCart();
+	const [cart, refetch] = useCart();
+	const axiosSecure = useAxiosSecure();
 	// Calculate the total price
 	const totalPrice = cart?.reduce((prev, current) => prev + current.price, 0);
 
+	// Delete event handler
+	const handleCartItemDelete = id => {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!',
+		}).then(result => {
+			if (result.isConfirmed) {
+				axiosSecure
+					.delete(`/carts/${id}`)
+					.then(res => {
+						console.log(res.data);
+						if (res?.data?.deletedCount) {
+							// Call refetch to update the cart number
+							refetch();
+							Swal.fire({
+								title: 'Deleted!',
+								text: 'Your file has been deleted.',
+								icon: 'success',
+							});
+						}
+					})
+					.catch(error => {
+						console.log(error);
+						toast.error('Something went wrong!😥');
+					});
+			}
+		});
+	};
 	return (
 		<div>
 			<Container>
@@ -62,9 +99,14 @@ const Cart = () => {
 											</div>
 										</td>
 										<td>{item?.name}</td>
-										<td>{item?.price}</td>
+										<td>${item?.price}</td>
 										<th>
-											<FaTrashCan className=" text-base hover:text-red-500 hover:cursor-pointer duration-300 transition-all "></FaTrashCan>
+											<button
+												onClick={() => handleCartItemDelete(item?._id)}
+												className=" btn btn-ghost"
+											>
+												<FaTrashCan className=" text-base text-red-500 hover:text-red-600 hover:cursor-pointer duration-300 transition-all "></FaTrashCan>
+											</button>
 										</th>
 									</tr>
 								))}
