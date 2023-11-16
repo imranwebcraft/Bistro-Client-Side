@@ -11,6 +11,7 @@ const Navbar = () => {
 
 	// Auth context
 	const { user, logOut } = useAuth();
+
 	// Log out event hadler
 	const handleLogOut = () => {
 		logOut()

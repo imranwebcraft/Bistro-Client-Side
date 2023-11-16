@@ -16,12 +16,16 @@ import {
 import { BsMenuButton } from 'react-icons/bs';
 import { TbBrandBooking } from 'react-icons/tb';
 import useCart from '../Hooks/useCart';
+import useAdmin from '../Hooks/useAdmin';
 
 const Dashboard = () => {
 	const [cart] = useCart();
 
 	// TODO: Get isAdmin value from the database
-	const isAdmin = true;
+
+	// const admin = true;
+
+	const [isAdmin] = useAdmin();
 
 	return (
 		<div className=" flex gap-10">
