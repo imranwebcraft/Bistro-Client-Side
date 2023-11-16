@@ -9,6 +9,7 @@ import {
 	updateProfile,
 } from 'firebase/auth';
 import auth from '../Config/Firebase.config';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null);
 
@@ -19,6 +20,8 @@ const AuthProvider = ({ children }) => {
 	// State
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+
+	const axiosPublic = useAxiosPublic();
 
 	// Firebase Manage
 
@@ -61,6 +64,21 @@ const AuthProvider = ({ children }) => {
 		const unSubscribe = onAuthStateChanged(auth, currentUser => {
 			setLoading(true);
 			setUser(currentUser);
+
+			if (currentUser) {
+				// TODO: Give access token and store the token to the client side
+				const user = { email: currentUser?.email };
+				axiosPublic.post('/jwt', user).then(res => {
+					console.log(res?.data);
+					if (res?.data?.token) {
+						localStorage.setItem('access-token', res?.data?.token);
+					}
+				});
+			} else {
+				// TODO: Remove the access token
+				localStorage.removeItem('access-token');
+			}
+
 			setLoading(false);
 			console.log('Observer', currentUser);
 		});
