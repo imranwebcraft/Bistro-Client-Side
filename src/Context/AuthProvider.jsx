@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
 			setUser(currentUser);
 
 			if (currentUser) {
-				// TODO: Give access token and store the token to the client side
+				// Done: Give access token and store the token to the client side
 				const user = { email: currentUser?.email };
 				axiosPublic.post('/jwt', user).then(res => {
 					console.log(res?.data);
@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
 					}
 				});
 			} else {
-				// TODO: Remove the access token
+				// Done: Remove the access token
 				localStorage.removeItem('access-token');
 			}
 
@@ -86,7 +86,7 @@ const AuthProvider = ({ children }) => {
 		return () => {
 			unSubscribe();
 		};
-	}, []);
+	}, [axiosPublic]);
 
 	const authInfo = {
 		user,
