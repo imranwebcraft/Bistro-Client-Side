@@ -5,10 +5,14 @@ import { DevTool } from '@hookform/devtools';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../Hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/SocialLogin';
 
 const SignUp = () => {
-	const { createUser, updateUserProfile, logOut } = useAuth();
+	const { createUser, updateUserProfile } = useAuth();
 	const navigate = useNavigate();
+	const axiosPublic = useAxiosPublic();
 
 	const {
 		register,
@@ -27,12 +31,28 @@ const SignUp = () => {
 				updateUserProfile(data.name, data.photo)
 					.then(() => {
 						toast.success('User profile update successfull');
-						logOut()
-							.then(() => {
-								navigate('/login');
+
+						// MARK::: Save user info to the database
+
+						const userInfo = {
+							name: data.name,
+							email: data.email,
+						};
+
+						axiosPublic
+							.post('/users', userInfo)
+							.then(res => {
+								if (res.data.insertedId) {
+									Swal.fire({
+										title: 'Success!',
+										text: 'User info set to the database',
+										timer: 1500,
+									});
+									navigate('/');
+								}
 							})
-							.catch(() => {
-								toast.error("Can't redirect to the login page");
+							.catch(err => {
+								toast.error(err.message);
 							});
 					})
 					.catch(() => {
@@ -148,7 +168,7 @@ const SignUp = () => {
 							</button>
 						</div>
 
-						<div className=" text-center mt-2">
+						<div className=" text-center my-2">
 							<p>
 								Already have an account?
 								<Link
@@ -160,7 +180,10 @@ const SignUp = () => {
 							</p>
 						</div>
 
-						<div className=" text-center mt-2">
+						{/* Social Login*/}
+						<SocialLogin></SocialLogin>
+						<div className="divider"></div>
+						<div className=" text-center">
 							<Link
 								to={'/'}
 								className="text-indigo-500 font-semibold bg-gray-200 hover:bg-gray-300 transition-all duration-300 px-3 py-1 rounded-sm text-center"

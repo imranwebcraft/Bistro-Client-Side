@@ -59,11 +59,19 @@ const router = createBrowserRouter([
 	// Admin /Dashboard Layout
 	{
 		path: '/dashboard',
-		element: <Dashboard />,
+		element: (
+			<PrivateRoute>
+				<Dashboard />
+			</PrivateRoute>
+		),
 		children: [
 			{
 				path: 'cart',
-				element: <Cart />,
+				element: (
+					<PrivateRoute>
+						<Cart />
+					</PrivateRoute>
+				),
 			},
 			{
 				path: '/dashboard/userHome',

@@ -9,13 +9,13 @@ import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import useAuth from '../../Hooks/useAuth';
 import { Helmet } from 'react-helmet-async';
+import SocialLogin from '../../Components/SocialLogin';
 
 const Login = () => {
 	const { logIn } = useAuth();
 
 	const location = useLocation();
 	const navigate = useNavigate();
-	console.log(location);
 
 	// State
 	// eslint-disable-next-line no-unused-vars
@@ -120,7 +120,7 @@ const Login = () => {
 							</button>
 						</div>
 
-						<div className=" text-center mt-2">
+						<div className=" text-center my-2">
 							<p>
 								Don&apos;t have an account?
 								<Link
@@ -132,7 +132,12 @@ const Login = () => {
 							</p>
 						</div>
 
-						<div className=" text-center mt-2">
+						{/* Social Login */}
+						<SocialLogin></SocialLogin>
+
+						<div className="divider"></div>
+
+						<div className=" text-center">
 							<Link
 								to={'/'}
 								className="text-indigo-500 font-semibold bg-gray-200 hover:bg-gray-300 transition-all duration-300 px-3 py-1 rounded-sm text-center"
