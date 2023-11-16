@@ -20,6 +20,7 @@ import AddItems from '../Pages/Dashboard/Admin/AddItems/AddItems';
 import ManageItems from '../Pages/Dashboard/Admin/ManageItems/ManageItems';
 import ManageBookings from '../Pages/Dashboard/Admin/ManageBookings/ManageBookings';
 import AllUsers from '../Pages/Dashboard/Admin/AllUsers/AllUsers';
+// import AdminRoute from './AdminRoute';
 
 const router = createBrowserRouter([
 	// Main Layout
