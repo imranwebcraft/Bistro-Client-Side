@@ -4,6 +4,8 @@ import Container from '../../../../UI/Container';
 import { DevTool } from '@hookform/devtools';
 import { FaUtensils } from 'react-icons/fa6';
 import useAxiosPublic from '../../../../Hooks/useAxiosPublic';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import { toast } from 'react-hot-toast';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_UPLOAD_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -11,25 +13,45 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddItems = () => {
 	// Jehetu eta secure call hobe na, publicly image host korteci
 	const axiosPublic = useAxiosPublic();
+	// use axiosSecure to post menu item data to the database
+	const axiosSecure = useAxiosSecure();
 
 	const {
 		formState: { errors },
 		register,
 		handleSubmit,
 		control,
+		reset,
 	} = useForm();
 	const onSubmit = async data => {
 		console.log(data);
 		// step -1:  Uploda the image to the imagebb
-		const imageFile = { image: data.image[0] };
-		// const formData = { image: data.image[0] };
-		console.log(imageFile);
-		const res = await axiosPublic.post(image_hosting_api, imageFile, {
+		// const imageFile = { image: data.image[0] };
+		// formData name is more preferable
+		const formData = { image: data.image[0] };
+		console.log(formData);
+		const res = await axiosPublic.post(image_hosting_api, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			},
 		});
-		console.log(res?.data?.data?.display_url);
+		if (res.data.success) {
+			// Now send the data to the database with the image url
+			// Menu item object
+			const menuItem = {
+				name: data.name,
+				recipe: data.recipe,
+				image: res.data.data.display_url,
+				category: data.category,
+				price: parseFloat(data.price),
+			};
+			// Send menuItem to the databse
+			const menuRes = await axiosSecure.post('/menu', menuItem);
+			if (menuRes.data.insertedId) {
+				toast.success(`${data.name} is added to the database`);
+				reset();
+			}
+		}
 	};
 	return (
 		<div>
