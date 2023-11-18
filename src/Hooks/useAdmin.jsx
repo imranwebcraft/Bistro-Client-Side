@@ -4,7 +4,7 @@ import auth from '../Config/Firebase.config';
 
 const useAdmin = () => {
 	// Problem: email get undefined
-	console.log(auth?.currentUser?.email);
+	// console.log(auth?.currentUser?.email);
 	const axiosSecure = useAxiosSecure();
 	const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
 		queryKey: ['isAdmin'],
