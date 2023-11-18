@@ -68,7 +68,7 @@ const Navbar = () => {
 			</li>
 			<li className=" uppercase">
 				<NavLink
-					to="/dashboard/allUsers"
+					to="/dashboard"
 					className={({ isActive }) =>
 						isActive ? 'font-semibold text-white' : ' font-medium'
 					}

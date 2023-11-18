@@ -65,13 +65,9 @@ const router = createBrowserRouter([
 	// Admin /Dashboard Layout
 	{
 		path: '/dashboard',
-		element: (
-			<PrivateRoute>
-				<Dashboard />
-			</PrivateRoute>
-		),
+		element: <Dashboard />,
 		children: [
-			//ADMIN
+			//ADMIN only route
 			{
 				path: '/dashboard/adminHome',
 				element: <AdminHome />,
@@ -79,10 +75,6 @@ const router = createBrowserRouter([
 			{
 				path: '/dashboard/addItems',
 				element: <AddItems />,
-			},
-			{
-				path: '/dashboard/manageItems',
-				element: <ManageItems />,
 			},
 			{
 				path: '/dashboard/manageItems',
@@ -97,7 +89,7 @@ const router = createBrowserRouter([
 				element: <AllUsers />,
 			},
 
-			// USER
+			// USER only route
 			{
 				path: 'cart',
 				element: (

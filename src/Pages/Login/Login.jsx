@@ -17,6 +17,8 @@ const Login = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
+	console.log(location.state);
+
 	// State
 	// eslint-disable-next-line no-unused-vars
 	const [disable, setDisable] = useState(true);
