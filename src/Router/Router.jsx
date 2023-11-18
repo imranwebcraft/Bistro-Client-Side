@@ -21,6 +21,7 @@ import ManageItems from '../Pages/Dashboard/Admin/ManageItems/ManageItems';
 import ManageBookings from '../Pages/Dashboard/Admin/ManageBookings/ManageBookings';
 import AllUsers from '../Pages/Dashboard/Admin/AllUsers/AllUsers';
 import AdminRoute from './AdminRoute';
+import UpdateItem from '../Pages/Dashboard/Admin/UpdateItem/UpdateItem';
 
 const router = createBrowserRouter([
 	// Main Layout
@@ -73,11 +74,11 @@ const router = createBrowserRouter([
 		children: [
 			//ADMIN only route
 			{
-				path: '/dashboard/adminHome',
+				path: 'adminHome',
 				element: <AdminHome />,
 			},
 			{
-				path: '/dashboard/addItems',
+				path: 'addItems',
 				element: (
 					<AdminRoute>
 						<AddItems />
@@ -85,16 +86,24 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: '/dashboard/manageItems',
-				element: <ManageItems />,
+				path: 'manageItems',
+				element: (
+					<AdminRoute>
+						<ManageItems />
+					</AdminRoute>
+				),
 			},
 			{
-				path: '/dashboard/manageBookings',
+				path: 'manageBookings',
 				element: <ManageBookings />,
 			},
 			{
-				path: '/dashboard/allUsers',
+				path: 'allUsers',
 				element: <AllUsers />,
+			},
+			{
+				path: 'updateItem/:id',
+				element: <UpdateItem />,
 			},
 
 			// USER only route
@@ -107,23 +116,23 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: '/dashboard/userHome',
+				path: 'userHome',
 				element: <UserHome />,
 			},
 			{
-				path: '/dashboard/reservation',
+				path: 'reservation',
 				element: <Reservation />,
 			},
 			{
-				path: '/dashboard/payment',
+				path: 'payment',
 				element: <Payment />,
 			},
 			{
-				path: '/dashboard/review',
+				path: 'review',
 				element: <AddReview />,
 			},
 			{
-				path: '/dashboard/booking',
+				path: 'booking',
 				element: <MyBooking />,
 			},
 		],
