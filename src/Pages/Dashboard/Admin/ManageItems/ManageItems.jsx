@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 
 const ManageItems = () => {
 	const axiosSecure = useAxiosSecure();
-
 	const [menus, refetch] = useMenu();
 
 	// Delete event handler
