@@ -48,7 +48,7 @@ const AddItems = () => {
 			// Send menuItem to the databse
 			const menuRes = await axiosSecure.post('/menu', menuItem);
 			if (menuRes.data.insertedId) {
-				toast.success(`${data.name} is added to the database`);
+				toast.success(`${data.name} is added to the menu `);
 				reset();
 			}
 		}

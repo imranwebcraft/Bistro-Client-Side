@@ -73,7 +73,7 @@ const Cart = () => {
 						<table className="table">
 							{/* head */}
 							<thead>
-								<tr>
+								<tr className=" text-center">
 									<th>Count</th>
 									<th>Image</th>
 									<th>Name</th>
@@ -85,7 +85,7 @@ const Cart = () => {
 								{/* row 1 */}
 
 								{cart?.map((item, index) => (
-									<tr key={item._id}>
+									<tr key={item._id} className=" text-center">
 										<td>
 											<span>{index + 1}</span>
 										</td>

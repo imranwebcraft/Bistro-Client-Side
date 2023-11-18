@@ -17,8 +17,6 @@ const AllUsers = () => {
 		},
 	});
 
-	console.log(users);
-
 	const handleDeleteUser = user => {
 		Swal.fire({
 			title: 'Delete This User?',
@@ -68,7 +66,7 @@ const AllUsers = () => {
 				}
 			})
 			.catch(err => {
-				console.log(err.message);
+				toast.error('Something wrong!!', err);
 			});
 	};
 
@@ -94,7 +92,7 @@ const AllUsers = () => {
 					<table className="table">
 						{/* head */}
 						<thead>
-							<tr>
+							<tr className=" text-center">
 								<th>Count</th>
 								<th>Name</th>
 								<th>Email</th>
@@ -104,7 +102,7 @@ const AllUsers = () => {
 						</thead>
 						<tbody>
 							{users?.map((user, index) => (
-								<tr key={user._id}>
+								<tr key={user._id} className=" text-center">
 									<td>
 										<span>{index + 1}</span>
 									</td>

@@ -28,7 +28,7 @@ const Dashboard = () => {
 	return (
 		<div className=" flex gap-10">
 			{/* Sidebar */}
-			<div className="h-screen p-3 w-80 space-y-2  bg-orange-500 text-gray-100 dark:bg-gray-900 dark:text-gray-100">
+			<div className="min-h-screen p-3 w-80 space-y-2  bg-orange-500 text-gray-100 dark:bg-gray-900 dark:text-gray-100">
 				{/* Heading */}
 				<div className="flex items-center p-2 space-x-4">
 					<div className=" text-center w-full">
