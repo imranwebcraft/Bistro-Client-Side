@@ -5,13 +5,14 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import useCart from '../../../Hooks/useCart';
 import useAuth from '../../../Hooks/useAuth';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CheckOutForm = () => {
 	// jehetu user must login thaka lagbe, tai user er token o check korbo tai secure ta use koralam
 	const axiosSecure = useAxiosSecure();
 	const [cart, refetch] = useCart();
 	const { user } = useAuth();
-
+	const navigate = useNavigate();
 	const totalPrice = cart?.reduce((prev, current) => prev + current.price, 0);
 
 	const [paymentError, setPaymentError] = useState(false);
@@ -108,6 +109,8 @@ const CheckOutForm = () => {
 				if (res.data.deleteResult.deletedCount) {
 					refetch();
 					toast.success('Cart Items Clear');
+					// Navigate the user to the payment history page
+					navigate('/dashboard/payment');
 				}
 			}
 		}
