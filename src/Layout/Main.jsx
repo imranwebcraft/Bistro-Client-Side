@@ -4,7 +4,7 @@ import Navbar from '../Pages/Home/Shared/Navbar/Navbar';
 
 const Main = () => {
 	return (
-		<div className=" tracking-wider leading-relaxed">
+		<div>
 			<Navbar></Navbar>
 			<Outlet></Outlet>
 			<Footer></Footer>

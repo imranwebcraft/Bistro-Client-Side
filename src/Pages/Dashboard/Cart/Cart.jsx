@@ -5,16 +5,18 @@ import Container from '../../../UI/Container';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 	// Hook
 	const [cart, refetch] = useCart();
 	const axiosSecure = useAxiosSecure();
 	// Calculate the total price
+
 	const totalPrice = cart?.reduce((prev, current) => prev + current.price, 0);
 
 	// Delete event handler
-	const handleCartItemDelete = id => {
+	const handleCartItemDelete = (id) => {
 		Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -23,11 +25,11 @@ const Cart = () => {
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Yes, delete it!',
-		}).then(result => {
+		}).then((result) => {
 			if (result.isConfirmed) {
 				axiosSecure
 					.delete(`/carts/${id}`)
-					.then(res => {
+					.then((res) => {
 						console.log(res.data);
 						if (res?.data?.deletedCount) {
 							// Call refetch to update the cart number
@@ -39,7 +41,7 @@ const Cart = () => {
 							});
 						}
 					})
-					.catch(error => {
+					.catch((error) => {
 						console.log(error);
 						toast.error('Something went wrong!😥');
 					});
@@ -58,14 +60,30 @@ const Cart = () => {
 
 				<div>
 					{/* Top Part */}
-					<div className=" flex items-center justify-around bg-emerald-500 py-4 px-2 rounded-md rounded-b-none text-white">
+					<div className=" flex items-center justify-around py-4 px-2 rounded-md rounded-b-none ">
 						<h3 className=" text-2xl font-medium">
 							Total Order: {cart?.length}
 						</h3>
 						<h3 className=" text-2xl font-medium">
 							Total Price: ${totalPrice}
 						</h3>
-						<h3 className=" text-2xl font-medium">Pay</h3>
+						{cart.length > 0 ? (
+							<Link to={'/dashboard/makePayment'}>
+								<button
+									disabled={!cart.length}
+									className=" btn btn-success btn-outline text-white text-2xl font-medium"
+								>
+									Pay
+								</button>
+							</Link>
+						) : (
+							<button
+								disabled
+								className=" btn btn-success btn-outline text-white text-2xl font-medium"
+							>
+								Pay
+							</button>
+						)}
 					</div>
 
 					{/* Table Part */}
@@ -90,7 +108,7 @@ const Cart = () => {
 											<span>{index + 1}</span>
 										</td>
 										<td>
-											<div className="flex items-center gap-3">
+											<div className="flex items-center justify-center gap-3">
 												<div className="avatar">
 													<div className="mask mask-squircle w-12 h-12">
 														<img src={item.image} alt="food Image" />

@@ -12,7 +12,7 @@ import Dashboard from '../Layout/Dashboard';
 import Cart from '../Pages/Dashboard/Cart/Cart';
 import UserHome from '../Pages/Dashboard/UserHome/UserHome';
 import Reservation from '../Pages/Dashboard/Reservation/Reservation';
-import Payment from '../Pages/Dashboard/Payment/Payment';
+import Payment from '../Pages/Dashboard/Payment Histrory/Payment';
 import AddReview from '../Pages/Dashboard/AddReview/AddReview';
 import MyBooking from '../Pages/Dashboard/MyBooking/MyBooking';
 import AdminHome from '../Pages/Dashboard/Admin/AdminHome/AdminHome';
@@ -22,6 +22,7 @@ import ManageBookings from '../Pages/Dashboard/Admin/ManageBookings/ManageBookin
 import AllUsers from '../Pages/Dashboard/Admin/AllUsers/AllUsers';
 import AdminRoute from './AdminRoute';
 import UpdateItem from '../Pages/Dashboard/Admin/UpdateItem/UpdateItem';
+import MakePayment from '../Pages/Dashboard/Make Payment/MakePayment';
 
 const router = createBrowserRouter([
 	// Main Layout
@@ -134,6 +135,10 @@ const router = createBrowserRouter([
 			{
 				path: 'booking',
 				element: <MyBooking />,
+			},
+			{
+				path: 'makePayment',
+				element: <MakePayment />,
 			},
 		],
 	},
