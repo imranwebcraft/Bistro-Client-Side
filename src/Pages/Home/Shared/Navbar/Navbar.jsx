@@ -4,10 +4,12 @@ import useAuth from '../../../../Hooks/useAuth';
 import toast from 'react-hot-toast';
 import { FaCartShopping } from 'react-icons/fa6';
 import useCart from '../../../../Hooks/useCart';
+import useAdmin from '../../../../Hooks/useAdmin';
 
 const Navbar = () => {
 	// Hook
 	const [cart] = useCart();
+	const [isAdmin] = useAdmin();
 
 	// Auth context
 	const { user, logOut } = useAuth();
@@ -18,13 +20,13 @@ const Navbar = () => {
 			.then(() => {
 				toast.success('Log Out successfull!');
 			})
-			.catch(error => {
+			.catch((error) => {
 				toast.error(error.message);
 			});
 	};
 
 	const navlinks = (
-		<ul className="menu menu-horizontal px-1 space-x-5">
+		<ul className="menu menu-horizontal px-1 space-x-5 flex items-center justify-center">
 			<li className=" uppercase">
 				<NavLink
 					to="/"
@@ -56,19 +58,48 @@ const Navbar = () => {
 					Order Food
 				</NavLink>
 			</li>
-			<li className=" uppercase ">
-				<NavLink
-					to="/secret"
-					className={({ isActive }) =>
-						isActive ? ' bg-green-500 font-semibold text-white' : ' font-medium'
-					}
-				>
-					Secret
-				</NavLink>
-			</li>
+
+			{
+				// ------------------Multi Layer ternary operator----------------
+				// user ? 'true' : 'false'
+				// user ? 'condition' ? 'double-true' : 'false' : 'false'
+			}
+
+			{/* --------------- Conditional Dahboard ------------------  */}
+
+			{user && isAdmin && (
+				<li className=" uppercase ">
+					<NavLink
+						to="/dashboard/adminHome"
+						className={({ isActive }) =>
+							isActive
+								? ' bg-green-500 font-semibold text-white'
+								: ' font-medium'
+						}
+					>
+						Dashboard
+					</NavLink>
+				</li>
+			)}
+
+			{user && !isAdmin && (
+				<li className=" uppercase ">
+					<NavLink
+						to="/dashboard/userHome"
+						className={({ isActive }) =>
+							isActive
+								? ' bg-green-500 font-semibold text-white'
+								: ' font-medium'
+						}
+					>
+						Dashboard
+					</NavLink>
+				</li>
+			)}
+
 			<li className=" uppercase">
 				<NavLink
-					to="/dashboard"
+					to="/dashboard/cart"
 					className={({ isActive }) =>
 						isActive ? 'font-semibold text-white' : ' font-medium'
 					}

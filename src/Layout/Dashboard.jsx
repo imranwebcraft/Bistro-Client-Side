@@ -21,7 +21,6 @@ import useAdmin from '../Hooks/useAdmin';
 const Dashboard = () => {
 	const [cart] = useCart();
 
-	// TODO: Get isAdmin value from the database
 	// const admin = true;
 	const [isAdmin] = useAdmin();
 

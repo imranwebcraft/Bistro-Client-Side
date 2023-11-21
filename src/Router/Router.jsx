@@ -76,7 +76,11 @@ const router = createBrowserRouter([
 			//ADMIN only route
 			{
 				path: 'adminHome',
-				element: <AdminHome />,
+				element: (
+					<AdminRoute>
+						<AdminHome />
+					</AdminRoute>
+				),
 			},
 			{
 				path: 'addItems',

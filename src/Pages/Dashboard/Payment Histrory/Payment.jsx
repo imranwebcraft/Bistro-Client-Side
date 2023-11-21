@@ -63,6 +63,14 @@ const Payment = () => {
 					</tbody>
 				</table>
 			</div>
+			<div
+				className=" flex justify-center items-center mt-16 tooltip"
+				data-tip="Click to see more history"
+			>
+				<p className="underline decoration-2  hover:decoration-blue-500">
+					See More
+				</p>
+			</div>
 		</Container>
 	);
 };

@@ -61,24 +61,23 @@ const AuthProvider = ({ children }) => {
 	// Observer
 
 	useEffect(() => {
-		const unSubscribe = onAuthStateChanged(auth, currentUser => {
+		const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setLoading(true);
 			setUser(currentUser);
 
 			if (currentUser) {
 				// Done: Give access token and store the token to the client side
 				const user = { email: currentUser?.email };
-				axiosPublic.post('/jwt', user).then(res => {
+				axiosPublic.post('/jwt', user).then((res) => {
 					if (res?.data?.token) {
 						localStorage.setItem('access-token', res?.data?.token);
+						setLoading(false);
 					}
 				});
 			} else {
 				// Done: Remove the access token
 				localStorage.removeItem('access-token');
 			}
-
-			setLoading(false);
 			console.log('Observer', currentUser);
 		});
 

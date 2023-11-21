@@ -16,8 +16,8 @@ const Testimonials = () => {
 
 	useEffect(() => {
 		fetch('http://localhost:5000/reviews')
-			.then(res => res.json())
-			.then(data => setReviews(data));
+			.then((res) => res.json())
+			.then((data) => setReviews(data));
 	}, []);
 	return (
 		<SectionContainer>
@@ -28,7 +28,7 @@ const Testimonials = () => {
 				></SectionTitle>
 
 				<Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-					{reviews?.map(review => (
+					{reviews?.map((review) => (
 						<SwiperSlide key={review._id}>
 							<div className=" flex flex-col justify-center items-center space-y-2">
 								<Rating style={{ maxWidth: 180 }} value={3} readOnly />

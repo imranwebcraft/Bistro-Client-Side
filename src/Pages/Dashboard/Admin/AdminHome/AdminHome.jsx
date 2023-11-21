@@ -1,7 +1,14 @@
+import useAuth from '../../../../Hooks/useAuth';
+
 const AdminHome = () => {
+	const { user } = useAuth();
+
 	return (
 		<div>
-			<h3>AdminHome</h3>
+			{/* Welcome message*/}
+			<span className=" text-3xl font-semibold">
+				Hi, Welcome {user?.displayName ? user?.displayName : 'Back'}
+			</span>
 		</div>
 	);
 };
